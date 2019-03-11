@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base href="https://tentacule.be/fossil/cpp-config/doc/tip/src/example.txt" />
+    <title>cpp-config: Documentation</title>
+      <link rel="alternate" type="application/rss+xml" title="RSS Feed"
+            href="/fossil/cpp-config/timeline.rss" />
+      <link rel="stylesheet" href="/fossil/cpp-config/style.css?id=7869a384" type="text/css"
+            media="screen" />
+  </head>
+
+  <body>
+    <div class="header">
+      <div class="title"><h1>cpp-config</h1>Documentation</div>
+        <div class="status">pierre — <a href='/fossil/cpp-config/login'>Logout</a>
+</div>
+    </div>
+
+    <div class="mainmenu">
+<a href='/fossil/cpp-config/home'>Home</a>
+<a href='/fossil/cpp-config/timeline'>Timeline</a>
+<a href='/fossil/cpp-config/dir?ci=tip'>Files</a>
+<a href='/fossil/cpp-config/brlist'>Branches</a>
+<a href='/fossil/cpp-config/taglist'>Tags</a>
+<a href='/fossil/cpp-config/ticket'>Tickets</a>
+<a href='/fossil/cpp-config/wiki'>Wiki</a>
+<a href='/fossil/cpp-config/setup'>Admin</a>
+</div>
+<div class="content">
+<script>
+function gebi(x){
+if(x.substr(0,1)=='#') x = x.substr(1);
+var e = document.getElementById(x);
+if(!e) throw new Error('Expecting element with ID '+x);
+else return e;}
+</script>
+<blockquote><pre>
+#============================================================================
+# Author      : Pierre BLAVY
+# Version     : 1.0
+# Copyright   : 2018 GPL 3.0 or any later version 
+#               https://www.gnu.org/licenses/gpl-3.0-standalone.html
+#============================================================================
+
+my_house{
+  name = pierre&#39;s house
+  cat  = caterpilar
+  cat  = catastrophy
+  door_size = 2.1     #meters
+  is_nice = yes
+}
+
+
+tree{}
+tree{}
+</pre></blockquote>
+</div>
+<div class="footer">
+This page was generated in about
+0.007s by
+Fossil 2.2 [81d7d3f43e] 2017-04-11 20:54:55
+</div>
+</body></html>

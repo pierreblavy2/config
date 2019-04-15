@@ -153,19 +153,6 @@ int main(int,char**){
 
 	std::vector<std::string> cats_v = my_house.values.get_multiple< std::vector<std::string> >("cat");
 	my_house.values.load_multiple(cats_v, "cat");
-
-	//--- custom context ---
-	//see custom context sextion just before main for My_context and string to bool conversion definition
-	//
-	//Value::to, Value_v::get_unique, Value_v::load_unique, Value_v::get_multiple, Value_v::load_multiple
-	//template function can accept a context tag, as extra optional template argument.
-	//This argument will be use as convert context to decide which Convert_t implementation should be
-	//called. This is the correct way to override default conversion rules.
-	bool is_ok = my_house.values.get_unique<bool,My_context>  ("is_nice", false);
-	     //instead of using yes/no, we use the custom rule : OK=>true, everything else => false
-
-	std::cout << "\n---\n"<<std::endl;
-
 }
 
 ```

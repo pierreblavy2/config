@@ -170,7 +170,7 @@ int main(int,char**){
 
 ```
 
-## Extend config to support custom conversions
+## Extend convert to support custom conversions
 Custom values are handled troug the generic convert template interface. User can extend this class by specializing 
 ```cpp
 #include <convert/convert.hpp>
@@ -184,7 +184,7 @@ struct convert::Convert_t<To_t, From_t , Context_t>{
 - Context_t is a dummy type, that allows to disanbigush the convert contexts. For config it's `config::Config_tag`. If for some reason you want to specify the convert context the `config::Value.to()`, `config::Values::load_unique(...)`, `config::Values::load_multiple(...)` and `config::Values::get_multiple(...)` functions take an optional context as a second template argument.
 
 
-## Extend config to support custom containers
+## Extend container to support custom containers
 Config uses the container library to interface with container. To support a custom container, you need to define the way data is added to your container. To do so specialize either `const::Add_back_t` (prefered) or `cont::Add_anywhere_t` (if you cannot do otherwise) for your container. For an example, have a look at `container/vector.hpp`.
 
 

@@ -11,7 +11,7 @@
 * #include <container/xxx.hpp> to add support for the xxx container. xxx=array, deque, set, unordered_set, vector
 
 # License
-* Copyright : Pierre Blavy 2018
+* Copyright : Pierre Blavy
 * License : [GPL 3.0](https://www.gnu.org/licenses/lgpl-3.0.txt) or any later version
  
 # Developpement versions 

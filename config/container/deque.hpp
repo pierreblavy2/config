@@ -8,7 +8,7 @@
 #ifndef UNICONT_DEQUE_HPP_
 #define UNICONT_DEQUE_HPP_
 
-#include "unicont.hpp"
+#include "container.hpp"
 
 #include <deque>
 #include <algorithm>

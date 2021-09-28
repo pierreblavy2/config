@@ -13,6 +13,7 @@
 # License
 * Copyright : Pierre Blavy
 * License : [LGPL 3.0](https://www.gnu.org/licenses/lgpl-3.0.txt) or any later version
+* was GPL3.0 until 2021-28-09, this license is technically still valid, but as LGPL is less restrictive, please use LGPL
 
 # Example
 ```

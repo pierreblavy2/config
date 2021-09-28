@@ -13,10 +13,6 @@
 # License
 * Copyright : Pierre Blavy
 * License : [GPL 3.0](https://www.gnu.org/licenses/lgpl-3.0.txt) or any later version
- 
-# Developpement versions 
-The developpement version can be downloaded on
-https://tentacule.be/fossil/cpp-config
 
 # Example
 ```

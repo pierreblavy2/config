@@ -1,6 +1,6 @@
 //============================================================================
 // Author  : Pierre BLAVY 2018
-// Version : 1.0
+// Version : 1.1
 // License : GPL 3.0 or any later version :
 //           https://www.gnu.org/licenses/gpl-3.0-standalone.html
 //============================================================================
@@ -10,8 +10,8 @@
 //You should have received a copy of the GNU General Public License along with this program.  If not, see <https://www.gnu.org/licenses/>
 
 
-#include <container/container.hpp>
-#include <convert/convert.hpp>
+#include "container/container.hpp"
+#include "convert/convert.hpp"
 
 namespace config{
 template<typename To_t, typename Context_t>
@@ -53,7 +53,7 @@ void Value::to(To_t & write_here)const{
 
 //--- xxx_unique ---
 
-template<typename T,typename Context_t>
+template<typename Context_t, typename T>
 void Value_v::load_unique(T&write_here, const std::string &name)const{
 	auto f = name_to_value.find(name);
 	if   (f==name_to_value.end()){throw_missing_value  (name,enclosing_block);}
@@ -63,7 +63,7 @@ void Value_v::load_unique(T&write_here, const std::string &name)const{
 }
 
 
-template<typename T,typename Context_t>
+template<typename Context_t, typename T>
 void Value_v::load_unique(T&write_here, const std::string &name, const T& default_v)const{
 	auto f = name_to_value.find(name);
 	if   (f==name_to_value.end()){write_here =  default_v; return;}
@@ -86,14 +86,14 @@ T Value_v::get_unique(const std::string &name, const T& default_v)const{
 //--- xxx_multiple ---
 
 
-template<typename Container_t,typename Context_t>
+template<typename Context_t, typename Container_t>
 size_t Value_v::load_multiple(Container_t& write_here, const std::string &name)const{
-	typedef cont::value_type<Container_t> value_type;
+	typedef container::value_type<Container_t> value_type;
 
 	static_assert(
-	    cont::is_implemented<cont::Add_back_t    ,Container_t>
-	  | cont::is_implemented<cont::Add_anywhere_t, Container_t>,
-	  "cont::add_back or cont::add_anywhere must be implemented for your container. "
+	    container::is_implemented<container::Add_back_t    ,Container_t>
+	  | container::is_implemented<container::Add_anywhere_t, Container_t>,
+	  "container::add_back or container::add_anywhere must be implemented for your container. "
 	  "See container/container.hpp for details."
 	);
 
@@ -106,10 +106,10 @@ size_t Value_v::load_multiple(Container_t& write_here, const std::string &name)c
 		const auto value = val_ptr->to<value_type,Context_t>();
 
 		//if possible add_back, if not add_anywhere
-		if constexpr(cont::is_implemented<cont::Add_back_t, Container_t>){
-			cont::add_back(write_here, std::move(value));
+		if constexpr(container::is_implemented<container::Add_back_t, Container_t>){
+			container::add_back(write_here, std::move(value));
 		}else{
-			cont::add_anywhere(write_here, std::move(value));
+			container::add_anywhere(write_here, std::move(value));
 		}
 	}
 

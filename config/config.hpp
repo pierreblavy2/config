@@ -1,6 +1,6 @@
 //============================================================================
 // Author  : Pierre BLAVY 2018
-// Version : 1.0
+// Version : 1.1
 // License : GPL 3.0 or any later version :
 //           https://www.gnu.org/licenses/gpl-3.0-standalone.html
 //============================================================================
@@ -18,9 +18,11 @@
 #include <unordered_map>
 #include <memory>
 
-#include <container/vector.hpp> //for convenience only
-#include "convert_bool.hpp"     //for convenience only
-#include "convert_lexical.hpp"  //for convenience only
+#include "../container/vector.hpp" //for convenience only
+#include "convert_bool.hpp"        //for convenience only
+#include "convert_chrono.hpp"      //for convenience only
+#include "convert_lexical.hpp"      //for convenience only
+
 
 
 namespace config{
@@ -30,6 +32,7 @@ typedef size_t Line_number;
 //This tag is used to identify that we're instanciating template in the config context
 //see convert/convert.hpp or config/convert_lexical.hpp for an example of tag usage.
 struct Config_tag{Config_tag()=delete;};
+
 
 
 //name =  value
@@ -103,6 +106,7 @@ struct Block_v{
 	Block & move(Block_ptr &&b);
 
 	void save(std::ostream &out, size_t indent=0);
+
 
 
 	//--- all blocks (by index) ---
@@ -234,8 +238,8 @@ struct Value_v{
 	//the template version loads and converts to T
 	void load_unique(std::string &write_here, const std::string &name) const;
 	void load_unique(std::string &write_here, const std::string &name, const std::string & default_v)const;
-	template<typename T, typename Context_t = Config_tag> void load_unique(T&write_here, const std::string &name) const;
-	template<typename T, typename Context_t = Config_tag> void load_unique(T&write_here, const std::string &name, const T& default_v)const;
+	template<typename Context_t = Config_tag, typename T> void load_unique(T&write_here, const std::string &name) const;
+	template<typename Context_t = Config_tag, typename T> void load_unique(T&write_here, const std::string &name, const T& default_v)const;
 
 
 	//load_multiple : APPEND the requested values in write_here
@@ -249,15 +253,15 @@ struct Value_v{
 	//write_here can be any container supported by cont (see container/container.hpp)
 	//    if possible values are added in order    (cont::add_back)
 	//    if not possible, they are added anywhere (cont::add_anywhere).
-	template<typename Container_t, typename Context_t = Config_tag> size_t       load_multiple(Container_t& write_here, const std::string &name)const;
-	template<typename Container_t, typename Context_t = Config_tag> Container_t  get_multiple( const std::string &name)const;
+	template<typename Context_t = Config_tag, typename Container_t> size_t       load_multiple(Container_t& write_here, const std::string &name)const;
+	template<typename Container_t , typename Context_t = Config_tag> Container_t  get_multiple( const std::string &name)const;
 
 
 	//Get a value,
 	//throw if multiple
 	//throw if no default, and missing
 	const std::string    & get_unique(const std::string &name)const;
-	template<typename T, typename Context_t = Config_tag> T get_unique(const std::string &name)const{T t; load_unique(t,name); return t;}
+	template<typename T, typename Context_t = Config_tag> T get_unique(const std::string &name)const{T t; this->template load_unique<Context_t>(t,name); return t;}
 
 	const std::string    & get_unique(const std::string &name, const std::string &default_v)const;
 	template<typename T, typename Context_t = Config_tag> T get_unique(const std::string &name, const T &default_v)const;
@@ -306,6 +310,7 @@ struct Block{
 	explicit Block(const std::string &name_=""):name(name_){}
 	Block(const Block&)=delete;
 	Block& operator =(const Block&)=delete;
+
 
 	std::string name;
 	Line_number begin_line=0;

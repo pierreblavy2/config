@@ -5,7 +5,7 @@
 
 # How to install
 * Download the source code
-* Extract src/lib/* to your library folder
+* Extract  `config`, `convert` and `container` to your library folder
 * #include <config/config.hpp> to read config
 * #include <config/convert_lexical.hpp> to add string to number conversions to config (require boost/lexical_cast)
 * #include <container/xxx.hpp> to add support for the xxx container. xxx=array, deque, set, unordered_set, vector
@@ -13,12 +13,12 @@
 # How to compile
 * Require `-std=c++17` or newer version.
 * add `config/config.cpp` to the source files.
-* add `-Ixxx` where `xxx` is the folder that contains the `config`, `convert` and `container` folders.
+* add `-Ixxx` where `xxx` is the folder that contains the `config`, `convert` and `container` folders (i.e., your library folder).
 
 # License
 * Copyright : Pierre Blavy
 * License : [LGPL 3.0](https://www.gnu.org/licenses/lgpl-3.0.txt) or any later version
-* was GPL3.0 until 2021-28-09, this license is technically still valid, but as LGPL is less restrictive, please use LGPL
+* Was GPL3.0 until 2021-28-09, this license is technically still valid, but as LGPL is less restrictive, please use LGPL
 
 # Example
 ```

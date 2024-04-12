@@ -6,9 +6,9 @@
 # How to install
 * Download the source code
 * Extract  `config`, `convert` and `container` to your library folder
-* #include <config/config.hpp> to read config
-* #include <config/convert_lexical.hpp> to add string to number conversions to config (require boost/lexical_cast)
-* #include <container/xxx.hpp> to add support for the xxx container. xxx=array, deque, set, unordered_set, vector
+* `#include <config/config.hpp>` to read config
+* `#include <config/convert_lexical.hpp>` to add string to number conversions to config (require boost/lexical_cast)
+* `#include <container/xxx.hpp>` to add support for the xxx container. `xxx`=`array`, `deque`, `set`, `unordered_set` or `vector`
 
 # How to compile
 * Require `-std=c++17` or newer version.

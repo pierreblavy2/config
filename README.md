@@ -10,6 +10,11 @@
 * #include <config/convert_lexical.hpp> to add string to number conversions to config (require boost/lexical_cast)
 * #include <container/xxx.hpp> to add support for the xxx container. xxx=array, deque, set, unordered_set, vector
 
+# How to compile
+* Require `-std=c++17` or newer version
+* add `config/config.cpp` to the source files
+* add `-Ixxx` where `xxx` is the folder that contains config
+
 # License
 * Copyright : Pierre Blavy
 * License : [LGPL 3.0](https://www.gnu.org/licenses/lgpl-3.0.txt) or any later version

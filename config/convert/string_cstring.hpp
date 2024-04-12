@@ -15,8 +15,13 @@
 #include "convert.hpp"
 #include <string>
 
+namespace config{
+  struct Config_tag;
+}
+
+
 template<>
-struct Convert_t<std::string, const char *,void>{
+struct Convert_t<std::string, const char *,Config_tag>{
 	static constexpr bool is_implemented=true;
 	typedef std::string   To_t;
 	typedef const char * From_t;
@@ -27,7 +32,7 @@ struct Convert_t<std::string, const char *,void>{
 };
 
 template<>
-struct Convert_t<const char *,std::string ,void>{
+struct Convert_t<const char *,std::string ,Config_tag>{
 	static constexpr bool is_implemented=true;
 
 	typedef const char * To_t;

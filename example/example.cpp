@@ -17,11 +17,11 @@
 
 //extend configuration  conversion rules, by using boost::lexical_cast for numeric types
 //NOTE : custom types conversions can be added the same way
-#include <config/convert_lexical.hpp>
+#include <config/convert/convert_lexical.hpp>
 
 //extend configuration  conversion rules, by using yes/no or y/n conversion to true/false
 //case insensitive
-#include <config/convert_bool.hpp>
+#include <config/convert/convert_bool.hpp>
 
 
 //extend configuration container support for loading values into a std::vector

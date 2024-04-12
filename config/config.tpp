@@ -121,7 +121,7 @@ size_t Value_v::load_multiple(Container_t& write_here, const std::string &name)c
 template<typename Container_t, typename Context_t>
 Container_t  Value_v::get_multiple(const std::string &name)const{
 	Container_t t;
-	load_multiple<Container_t,Context_t>(t,name);
+	load_multiple<Context_t,Container_t>(t,name);
 	return t;
 }
 

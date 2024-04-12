@@ -11,7 +11,7 @@
 
 
 #include "config.hpp"
-#include "convert_bool.hpp"
+#include <config/convert/convert_bool.hpp>
 
 #include <cassert>
 #include <string>

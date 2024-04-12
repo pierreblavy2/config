@@ -11,9 +11,9 @@
 * #include <container/xxx.hpp> to add support for the xxx container. xxx=array, deque, set, unordered_set, vector
 
 # How to compile
-* Require `-std=c++17` or newer version
-* add `config/config.cpp` to the source files
-* add `-Ixxx` where `xxx` is the folder that contains config
+* Require `-std=c++17` or newer version.
+* add `config/config.cpp` to the source files.
+* add `-Ixxx` where `xxx` is the folder that contains the `config`, `convert` and `container` folders.
 
 # License
 * Copyright : Pierre Blavy

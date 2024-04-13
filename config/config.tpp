@@ -136,7 +136,7 @@ bool Value_v::load_try(T &write_here, const std::string &name)const{
 	if   (f==name_to_value.end()){return false;}
 	if   (f->second.size()==0)   {return false;}
 	if   (f->second.size()> 1)   {throw_multiple_values(name,enclosing_block);}
-	f->second[0]->to<T,Context_t>(write_here);
+	write_here = f->second[0]->to<T,Context_t>();
 	return true;
 }
 
@@ -144,8 +144,8 @@ bool Value_v::load_try(T &write_here, const std::string &name)const{
 template<typename Context_t, typename T>
 void Value_v::load_optional(std::optional<T> &write_here, const std::string &name)const{
 	auto f = name_to_value.find(name);
-	if   (f==name_to_value.end()){write_here=std::nullopt;}
-	if   (f->second.size()==0)   {write_here=std::nullopt;}
+	if   (f==name_to_value.end()){write_here=std::nullopt;return;}
+	if   (f->second.size()==0)   {write_here=std::nullopt;return;}
 	if   (f->second.size()> 1)   {throw_multiple_values(name,enclosing_block);}
 	write_here = f->second[0]->to<T,Context_t>();
 }

@@ -18,11 +18,16 @@
 #include <unordered_map>
 #include <memory>
 
-#include <container/vector.hpp> //for convenience only
 
-//#include <convert/convert_bool.hpp>        //for convenience only
-//#include <convert/convert_chrono.hpp>      //for convenience only
-//#include <convert/convert_lexical.hpp>      //for convenience only
+#if __cplusplus >= 201703L
+#include <optional>
+#endif
+
+
+#include "../container/vector.hpp" //for convenience only
+#include "convert_bool.hpp"        //for convenience only
+//#include "convert_chrono.hpp"      //for convenience only
+//#include "convert_lexical.hpp"      //for convenience only
 
 
 
@@ -214,7 +219,7 @@ struct Value_v{
 	//if must_exist == false => return iterators on a dummy empty vector if the key doesn't exists.
 
 	typedef Derefernce_iterator_t < std::vector<Value*>::iterator >      Value_iterator;
-    typedef Derefernce_iterator_t < std::vector<Value*>::const_iterator >Value_const_iterator;
+        typedef Derefernce_iterator_t < std::vector<Value*>::const_iterator >Value_const_iterator;
 	typedef Range_t<Value_iterator>       Value_range;
 	typedef Range_t<Value_const_iterator> Value_const_range;
 
@@ -274,10 +279,20 @@ struct Value_v{
 	bool get_yes_no(const std::string &name, bool b)const;
 
 
-	//TODO Get an optional unique value
-	//throw if not unique
-	//return an emprty optional if doesn't exists
+	//Get a value if exists
+	
+        template<typename Context_t = Config_tag,typename T>
+	bool load_try(T &write_here, const std::string &name)const;
 
+        #if __cplusplus >= 201703L
+	template<typename Context_t = Config_tag, typename T>
+	void load_optional(std::optional<T> &write_here, const std::string &name)const;
+
+	std::optional<std::string> get_optional(const std::string &name)const;
+	
+	template<typename T, typename Context_t = Config_tag> 
+	std::optional<T> get_optional(const std::string &name)const;
+	#endif
 
 
 

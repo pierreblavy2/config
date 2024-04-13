@@ -121,14 +121,47 @@ size_t Value_v::load_multiple(Container_t& write_here, const std::string &name)c
 template<typename Container_t, typename Context_t>
 Container_t  Value_v::get_multiple(const std::string &name)const{
 	Container_t t;
-	load_multiple<Context_t,Container_t>(t,name);
+	load_multiple<Container_t,Context_t>(t,name);
 	return t;
 }
 
 
 
 
+//--- get optional ---
 
+template<typename Context_t, typename T>
+bool Value_v::load_try(T &write_here, const std::string &name)const{
+	auto f = name_to_value.find(name);
+	if   (f==name_to_value.end()){return false;}
+	if   (f->second.size()==0)   {return false;}
+	if   (f->second.size()> 1)   {throw_multiple_values(name,enclosing_block);}
+	f->second[0]->to<T,Context_t>(write_here);
+	return true;
+}
+
+#if __cplusplus >= 201703L
+template<typename Context_t, typename T>
+void Value_v::load_optional(std::optional<T> &write_here, const std::string &name)const{
+	auto f = name_to_value.find(name);
+	if   (f==name_to_value.end()){write_here=std::nullopt;}
+	if   (f->second.size()==0)   {write_here=std::nullopt;}
+	if   (f->second.size()> 1)   {throw_multiple_values(name,enclosing_block);}
+	write_here = f->second[0]->to<T,Context_t>();
+}
+
+inline std::optional<std::string> Value_v::get_optional(const std::string &name)const{ 
+  return this->template get_optional<std::string,Config_tag >(name); 
+}
+
+
+template<typename T, typename Context_t> 
+std::optional<T> Value_v::get_optional(const std::string &name)const{
+  std::optional<T> t; 
+  this->template load_optional<Context_t>(t,name); 
+  return t;
+}
+#endif
 
 
 }//end namesapce config

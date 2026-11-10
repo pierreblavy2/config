@@ -11,13 +11,17 @@
 
 
 #include "config.hpp"
-//#include <config/convert/convert_bool.hpp>
+#include <config/convert/convert_bool.hpp>
 
 #include <cassert>
 #include <string>
 #include <fstream>
 #include <regex>
 #include <string>
+#include <algorithm>
+#include <cctype>
+#include <locale>
+
 
 namespace{
 
@@ -475,9 +479,6 @@ void Block::load(const std::string  & file_path){
 
 
 
-#include <algorithm>
-#include <cctype>
-#include <locale>
 
 
 namespace{
@@ -671,5 +672,4 @@ void Config::load(std::istream & in, const std::string& path_info){
 
 
 }//end namesapce config
-
 

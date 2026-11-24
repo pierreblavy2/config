@@ -13,14 +13,19 @@
 #include "container/container.hpp"
 #include "convert/convert.hpp"
 
+
 namespace config{
+
+
+
+
 template<typename To_t, typename Context_t>
 void Value::throw_convert(const std::string & error)const{
 	std::string msg;
 	if constexpr (std::is_same<Context_t,Config_tag>::value ){
 		msg = std::string("Cannot convert value to type ") + typeid(To_t).name();
 	}else{
-		msg = std::string("Cannot convert value to type ") + typeid(To_t).name() + " witnin context " + typeid(Context_t).name();
+        msg = std::string("Cannot convert value to type ") + typeid(To_t).name() + " within context " + typeid(Context_t).name();
 	}
 
 	if(line !=0 ){msg+=", line=" +std::to_string(line);}
@@ -100,10 +105,10 @@ size_t Value_v::load_multiple(Container_t& write_here, const std::string &name)c
 	auto f = name_to_value.find(name);
 	if(f==name_to_value.end()){return 0;}
 
-	for(const auto val_ptr : f->second){
+    for(const auto val_ptr : f->second){
 		//get and convert
-		const std::string value_str = val_ptr->value;
-		const auto value = val_ptr->to<value_type,Context_t>();
+        //const std::string value_str = val_ptr->value;
+        auto value = val_ptr->to<value_type,Context_t>();
 
 		//if possible add_back, if not add_anywhere
 		if constexpr(container::is_implemented<container::Add_back_t, Container_t>){
@@ -121,7 +126,7 @@ size_t Value_v::load_multiple(Container_t& write_here, const std::string &name)c
 template<typename Container_t, typename Context_t>
 Container_t  Value_v::get_multiple(const std::string &name)const{
 	Container_t t;
-	load_multiple<Container_t,Context_t>(t,name);
+    load_multiple<Context_t>(t,name);
 	return t;
 }
 

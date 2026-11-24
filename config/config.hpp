@@ -67,8 +67,6 @@ private:
 //As Block and Value are stored internally in unique_ptr, this iterator dereference one more time
 struct Block;
 typedef std::unique_ptr<Block> Block_ptr;
-
-struct Value;
 typedef std::unique_ptr<Value> Value_ptr;
 
 
@@ -104,7 +102,9 @@ struct Range_t{
 
 
 struct Block_v{
-	explicit Block_v (Block * enclosing_block_ = nullptr):enclosing_block(enclosing_block_){}
+    explicit Block_v (Block * enclosing_block_ = nullptr);
+    ~Block_v();
+
 	Block_v(const Block_v&)=delete;
 	Block_v& operator =(const Block_v&)=delete;
 
@@ -122,7 +122,9 @@ struct Block_v{
 	typedef Range_t<AllBlocks_const_iterator> AllBlocks_const_range;
 
 	size_t  size()           const{return blocks.size();}
-	Block & at(size_t index)const{return *blocks.at(index);}
+
+    const Block & at(size_t index)const{return *blocks.at(index);}
+          Block & at(size_t index)     {return *blocks.at(index);}
 
 	AllBlocks_const_iterator begin ()const{return static_cast<AllBlocks_const_iterator>(blocks.begin());}
 	AllBlocks_const_iterator end   ()const{return static_cast<AllBlocks_const_iterator>(blocks.end  ());}
@@ -324,6 +326,7 @@ private:
 //name{...}
 struct Block{
 	explicit Block(const std::string &name_=""):name(name_){}
+
 	Block(const Block&)=delete;
 	Block& operator =(const Block&)=delete;
 

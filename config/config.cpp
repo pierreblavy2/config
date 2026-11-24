@@ -13,15 +13,13 @@
 #include "config.hpp"
 #include <config/convert/convert_bool.hpp>
 
+#include <algorithm>
 #include <cassert>
-#include <string>
+#include <cctype>
 #include <fstream>
+#include <locale>
 #include <regex>
 #include <string>
-#include <algorithm>
-#include <cctype>
-#include <locale>
-
 
 namespace{
 
@@ -263,6 +261,9 @@ std::string Value_v::debug_str()const{
 
 
 //--- Block_v ---
+Block_v::Block_v(Block * enclosing_block_) : enclosing_block(enclosing_block_) {}
+Block_v::~Block_v() = default;
+
 void Block_v::save(std::ostream &out, size_t indent){
 	for(const auto &b : blocks){
 		b->save(out,indent);
@@ -543,7 +544,6 @@ void Block::load(std::istream & in, const std::string &path_info){
 	//--- line helpers ---
 	auto remove_comment=[&](std::string &s){
 		std::smatch m;
-		std::regex_match(s,m,regex_comment);
 		if(std::regex_match(s,m,regex_comment)){
 			s=m[1];
 		}
